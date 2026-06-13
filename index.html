@@ -1,323 +1,1200 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My World</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nur Imamulhaq | IT Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E24B4A;
+    --red-dark: #A32D2D;
+    --red-bright: #FF3B3B;
+    --red-glow: rgba(226, 75, 74, 0.15);
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --bg4: #1f1f1f;
+    --border: rgba(255,255,255,0.07);
+    --border-red: rgba(226, 75, 74, 0.3);
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --text-dim: #555;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #121212; 
-            color: #DCDCDC; 
-            line-height: 1.6;
-            text-align: center;
-        }
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 2px; }
 
-        h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 15px;
-        }
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
 
-        h1 {
-            font-size: 3.5em;
-            color: #FFEB3B;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-            letter-spacing: 3px;
-        }
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--red);
+    text-decoration: none;
+    border: 1px solid var(--border-red);
+    padding: 8px 20px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--red-glow); }
 
-        h2 {
-    font-size: 2.5em;
-    background: linear-gradient(90deg, #FFEB3B, #F44336);
-    -webkit-background-clip: text; 
-    background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    color: transparent; 
-    margin-bottom: 15px;
-}
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(226,75,74,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(226,75,74,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    top: 20%; left: 60%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(226,75,74,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .hero-text { flex: 1; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    border: 1px solid var(--border-red);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  .hero-name {
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .hero-name span { color: var(--red); }
+  .hero-title {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .hero-photo {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hero-photo img {
+    width: 280px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--red) 0%, transparent 60%);
+    border-radius: 10px;
+    z-index: 0;
+  }
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    bottom: -16px; right: -16px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--border-red);
+    border-radius: 8px;
+    z-index: 0;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--mono);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--red); }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
 
+  /* SECTIONS */
+  section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.4;
+  }
+  .section-title {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+    line-height: 1.1;
+  }
 
-        h2:after {
-            content: "";
-            display: block;
-            width: 60%;
-            height: 3px;
-            background: #F44336;
-            margin: 10px auto;
-        }
+  /* SKILLS */
+  #skills { border-top: 1px solid var(--border); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .skill-cat {
+    background: var(--bg);
+    padding: 32px;
+    transition: background 0.2s;
+  }
+  .skill-cat:hover { background: var(--bg2); }
+  .skill-cat-icon {
+    width: 40px; height: 40px;
+    background: var(--red-glow);
+    border: 1px solid var(--border-red);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .skill-cat-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { color: var(--red); border-color: var(--border-red); }
 
-        h3 {
-            font-size: 1.8em;
-            color: #FFEB3B;
-        }
+  /* EXPERIENCE */
+  #experience { border-top: 1px solid var(--border); }
+  .exp-timeline { position: relative; padding-left: 32px; }
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red), var(--bg));
+  }
+  .exp-item {
+    position: relative;
+    margin-bottom: 56px;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -37px; top: 6px;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(226,75,74,0.5);
+  }
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .exp-role {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .exp-company {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 12px;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    color: var(--red);
+    flex-shrink: 0;
+    font-family: var(--mono);
+    margin-top: 1px;
+  }
 
-        nav {
-            background: #1D1D1D;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        }
+  /* PROJECTS */
+  #projects { border-top: 1px solid var(--border); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .project-card {
+    background: var(--bg);
+    padding: 32px;
+    cursor: default;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover { background: var(--bg2); }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .project-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .project-course {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--red);
+    background: var(--red-glow);
+    border: 1px solid var(--border-red);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
 
-        nav a {
-            padding: 10px 20px;
-            margin: 5px;
-            color: #ffffff;
-            background: linear-gradient(90deg, #F44336, #FFEB3B);
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1em;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease-in-out;
-        }
+  /* EDUCATION */
+  #education { border-top: 1px solid var(--border); }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .edu-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: var(--border-red); }
+  .edu-card.current::after {
+    content: 'CURRENT';
+    position: absolute;
+    top: 20px; right: 20px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--red);
+    border: 1px solid var(--border-red);
+    padding: 3px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.1em;
+  }
+  .edu-period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .edu-degree {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .edu-uni {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .edu-gpa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+  }
+  .edu-gpa::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+  }
 
-        nav a:hover {
-            color: #121212;
-            background: #FFEB3B;
-        }
+  /* ABOUT / PERSONAL */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+  .about-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .info-block {
+    padding: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .info-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  .info-value {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .hobby-tag {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin: 4px;
+  }
 
-        section {
-            padding: 60px 20px;
-            margin: 40px 0;
-            background-color: #1D1D1D;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-        }
+  /* LEADERSHIP */
+  #leadership { border-top: 1px solid var(--border); }
+  .leadership-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .leadership-item {
+    background: var(--bg);
+    padding: 24px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    transition: background 0.2s;
+  }
+  .leadership-item:hover { background: var(--bg2); }
+  .leadership-icon {
+    width: 36px; height: 36px;
+    background: var(--red-glow);
+    border: 1px solid var(--border-red);
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+  .leadership-role { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .leadership-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-        img {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 10px;
-            margin: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        }
+  /* CONTACT */
+  #contact {
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  #contact .section-title { text-align: center; margin-bottom: 16px; }
+  .contact-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+  .contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .contact-link:hover {
+    color: var(--text);
+    border-color: var(--border-red);
+    background: var(--red-glow);
+  }
+  .contact-link-icon { font-size: 16px; color: var(--red); }
 
-        .large-img {
-            max-width: 500px;
-        }
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .footer-copy span { color: var(--red); }
+  .back-top {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .back-top:hover { color: var(--red); }
 
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
+  /* GALLERY */
+  #gallery { border-top: 1px solid var(--border); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: grayscale(40%) contrast(1.05);
+    transition: all 0.3s;
+    border: 1px solid var(--border);
+  }
+  .gallery-grid img:hover {
+    filter: grayscale(0%) contrast(1.1);
+    border-color: var(--border-red);
+    transform: scale(1.02);
+  }
 
-        button {
-            padding: 12px 25px;
-            background: #F44336;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s ease;
-        }
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    #hero { padding: 100px 20px 60px; }
+    .hero-inner { flex-direction: column-reverse; gap: 48px; text-align: center; }
+    .hero-stats { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .hero-photo img { width: 200px; height: 240px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
 
-        button:hover {
-            background: #FFEB3B;
-            color: #121212;
-        }
-
-        ul {
-            text-align: left;
-            margin: 0 auto;
-            display: inline-block;
-        }
-
-        footer {
-            background-color: #1D1D1D;
-            padding: 20px;
-            margin-top: 40px;
-            color: #DCDCDC;
-        }
-
-        footer p {
-            font-size: 1em;
-        }
-    </style>
+  /* REACT ROOT OVERRIDES — react component mounts here */
+  #react-skills { width: 100%; }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Welcome to My World</h1>
-        <nav>
-            <a href="#biodata">Biodata</a>
-            <a href="#contact">Contact Me</a>
-            <a href="#hobby">Hobby</a>
-            <a href="#family">Family</a>
-            <a href="#projects">Projects & Achievements</a>
-            <a href="#dreams">Dreams and Goals</a>
-            <a href="#experience">Experience</a>
-            <a href="#education">Education</a>
-            <a href="#gallery">Gallery</a>
-        </nav>
-    </header>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">NIM // PORTFOLIO</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">HIRE ME</a>
+</nav>
 
-    <!-- Biodata Section -->
-    <section id="biodata">
-        <h2>Biodata</h2>
-        <p><strong>Name:</strong> Nur Imamulhaq Bin Anwarulhaq</p>
-        <p><strong>Age:</strong> 20</p>
-        <p><strong>Address:</strong> 140 Jalan Baiduri 2, Taman Baiduri Batu Kikir, 72200 Negeri Sembilan</p>
-        <div class="gallery">
-            <img src="Images/WhatsApp Image 2024-12-02 at 22.46.03_bbe93da1.jpg" height="10" width="10" alt="Small Photo of Me">
-            <img src="Images/WhatsApp Image 2024-12-04 at 20.27.21_83e626ad.jpg" alt="Large Photo of Me" class="large-img">
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Available for opportunities</div>
+      <h1 class="hero-name">Nur<br>Imam<span>ulhaq</span></h1>
+      <p class="hero-title">// Information Systems Management Student · Full-Stack Dev · IT Support</p>
+      <p class="hero-desc">
+        Engineering dynamic web systems, managing database architectures, and translating complex data into actionable intelligence. Based in Negeri Sembilan, Malaysia.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Me
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">3.34<span>↑</span></div>
+          <div class="stat-label">Current GPA</div>
         </div>
-    </section>
-
-    <!-- Contact Me Section -->
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <ul>
-            <li>Facebook: <a href="https://www.facebook.com/nurimamulhaq" target="_blank">Nur Imamul Haq</a></li>
-            <li>Instagram: <a href="https://www.instagram.com/immhq__" target="_blank">@immhq__</a></li>
-            <li>Phone: <a href="tel:+60169611442">016-9611442</a></li>
-            <li>TikTok: <a href="https://www.tiktok.com/@nr_imm" target="_blank">nr_imm</a></li>
-        </ul>
-    </section>
-
-    <!-- Hobby Section -->
-    <section id="hobby">
-        <h2>Hobby: Fishing</h2>
-        <p>I started fishing at the age of 7 when my father taught me how to fish for ikan puyu-puyu. It's been a cherished hobby ever since.</p>
-        <div class="gallery">
-            <img src="Images/IMG-20241203-WA0040.jpg" alt="Fishing Image 1">
-            <img src="Images/g5.jpg" alt="Fishing Image 2">
-            <img src="Images/IMG-20241203-WA0047.jpg" alt="Fishing Image 3">
+        <div class="stat-item">
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label">Projects Built</div>
         </div>
-    </section>
-
-     <!-- Family Section -->
-     <section id="family">
-        <h2>Family</h2>
-        <p><strong>Father:</strong> Anwarulhaq Bin A. Rahim, 54, teacher at SK Batu Kikir.</p>
-        <img src="Images/WhatsApp Image 2024-12-03 at 23.27.47_b6805f4f.jpg" alt="Father">
-        <p><strong>Mother:</strong> Nurhayati Binti Mohamed Jaid, 54, teacher at SK Tungku Muda Serting.</p>
-        <img src="Images/emak.jpg" alt="Mother">
-        <p><strong>Siblings:</strong></p>
-        <ul>
-            <li>Fatin Nur Syuhada, Diploma in Education at UKM.</li>
-            <img src="Images/WhatsApp Image 2024-12-03 at 23.00.06_c1b2dab5.jpg" alt="Fatin Nur Syuhada">
-            <li>Fatin Nur Umairah, Network Security Engineer at Aceteam Networks.</li>
-            <img src="Images/WhatsApp Image 2024-12-03 at 23.00.07_e7fced5c.jpg" alt="Fatin Nur Umairah">
-            <li>Muhammad Naim Afiq, 18, SPM graduate.</li>
-            <img src="Images/IMG-20241203-WA0044.jpg" alt="Muhammad Naim Afiq">
-            <li>Fatin Nur Najwa, 16, SMKA SHAMS student.</li>
-            <img src="Images/najwa.jpg" alt="Fatin Nur Najwa">
-        </ul>
-    </section>
-
-    <!-- Projects and Achievements Section -->
-    <section id="projects">
-        <h2>Projects & Achievements</h2>
-        <h3>1. Achievement in Scratch Programming</h3>
-        <p>Created interactive projects and games using Scratch as part of my learning process.</p>
-        <img src="Images/WhatsApp Image 2024-12-08 at 00.16.57_b1da91cf.jpg" alt="Scratch Project">
-        
-        <h3>2. Completed MakeCode Projects</h3>
-        <p>Built various electronic projects using MakeCode to enhance my understanding of coding.</p>
-        <img src="Images/make.jpg" alt="MakeCode Project">
-        
-        <h3>3. Mastered Video Editing Tools</h3>
-        <p>Gained expertise in CapCut and Adobe Premiere Pro for video creation and editing.</p>
-        <img src="Images/WhatsApp Image 2024-11-29 at 05.37.10_d84f968a.jpg" alt="Video Editing Project">
-    </section>
-
-    <!-- Dreams and Goals Section -->
-    <section id="dreams">
-        <h2>Dreams and Goals</h2>
-        <p>Here are my aspirations for the future:</p>
-        <ul>
-            <li>To become a technology expert and contribute to educational advancements.</li>
-            <li>To master advanced video editing and programming tools.</li>
-            <li>To inspire students to explore coding and technology through teaching.</li>
-            <li>To achieve a balanced life, spending time with family and achieving career goals.</li>
-        </ul>
-    </section>
-
-     <!-- Experience Section -->
-     <section id="experience">
-        <h2>Experience</h2>
-        <h3>1. Canteen Staff</h3>
-        <p>After SPM, I worked as a canteen staff at SK Batu Kikir, learning responsibility and gaining work experience.</p>
-        <div class="gallery">
-            <img src="Images/IMG-20241204-WA0011.jpg" alt="Canteen Work Image 1">
-            <img src="Images/IMG-20241204-WA0010.jpg" alt="Canteen Work Image 2">
+        <div class="stat-item">
+          <div class="stat-num">2<span>+</span></div>
+          <div class="stat-label">Years in IT</div>
         </div>
-
-        <h3>2. Internship</h3>
-        <p>During my internship, I enhanced my ICT skills, video editing expertise, and teamwork capabilities.</p>
-        <div class="gallery">
-            <img src="Images/g9.jpg" alt="Internship Image 1">
-            <img src="Images/IMG-20241204-WA0007.jpg" alt="Internship Image 2">
-            <img src="Images/IMG-20241204-WA0006.jpg" alt="Internship Image 3">
-        </div>
-    </section>
-      <!-- Education Section -->
-         <section id="education">
-         <h2>Education</h2>
-        <h3>Primary School: Sekolah Kebangsaan Batu Kikir</h3>
-    <p>Known for being mischievous, stubborn, and often sporting a shaved head.</p>
-    <img src="Images/IMG-20241203-WA0049.jpg" alt="Primary School Image">
-
-    <h3>Secondary School: SMA Haji Muhammad</h3>
-    <p>As a religious school student, I matured, became disciplined, and upheld good manners.</p>
-    <img src="Images/IMG-20241203-WA0052.jpg" alt="Secondary School Image">
-
-    <h3>University: UiTM Rembau</h3>
-    <p>Learned independence, met diverse friends, and formed lifelong bonds with my group "Youngblood (YB)." Currently living with close friends.</p>
-    <div class="gallery">
-        <img src="Images/IMG-20241204-WA0008.jpg" alt="University Life Image 1">
-        <img src="Images/uni mak n abah.jpg" alt="University Life Image 2">
-        <img src="Images/IMG-20241204-WA0009.jpg" alt="University Life Image 3">
+      </div>
     </div>
+    <div class="hero-photo">
+      <img src="Images/WhatsApp Image 2024-12-04 at 20.27.21_83e626ad.jpg" alt="Nur Imamulhaq" />
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 // About</div>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a results-driven Information Systems Management student at UiTM Puncak Perdana with hands-on experience spanning full-stack web development, database administration, and enterprise IT support.
+      </p>
+      <p>
+        Proficient in engineering dynamic web applications using MVC frameworks, managing non-relational databases with MongoDB and Studio3T, and transforming raw datasets into actionable intelligence via Tableau and IBM SPSS.
+      </p>
+      <p>
+        Outside of code, I lead, communicate, and mentor — having served as a class representative, event emcee, and educator intern. My goal: deliver measurable value in System Analysis, IT Support, or Consulting roles.
+      </p>
+      <div style="margin-top: 24px;">
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Hobbies &amp; Interests</div>
+        <span class="hobby-tag">🎣 Fishing</span>
+        <span class="hobby-tag">🎬 Video Editing</span>
+        <span class="hobby-tag">💻 Web Development</span>
+        <span class="hobby-tag">📊 Data Analytics</span>
+        <span class="hobby-tag">🎮 Esports</span>
+      </div>
+    </div>
+    <div class="about-info-grid">
+      <div class="info-block">
+        <div class="info-label">Full Name</div>
+        <div class="info-value">Nur Imamulhaq Bin Anwarulhaq</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Location</div>
+        <div class="info-value">Batu Kikir, Negeri Sembilan</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Phone</div>
+        <div class="info-value">016-9611442</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Email</div>
+        <div class="info-value">nrimam04@gmail.com</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">GitHub</div>
+        <div class="info-value">github.com/nrimm04</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Languages</div>
+        <div class="info-value">Malay · English · Arabic</div>
+      </div>
+      <div class="info-block" style="grid-column: span 2;">
+        <div class="info-label">Current Focus</div>
+        <div class="info-value">B.Sc. Information Systems Management @ UiTM Puncak Perdana</div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 // Skills</div>
+  <h2 class="section-title">Technical Expertise</h2>
+  <div class="skills-grid">
+    <div class="skill-cat">
+      <div class="skill-cat-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="skill-cat-name">Web &amp; Frameworks</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML &amp; CSS</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">CakePHP</span>
+        <span class="skill-tag">MVC</span>
+        <span class="skill-tag">Laragon</span>
+        <span class="skill-tag">phpMyAdmin</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </div>
+      <div class="skill-cat-name">Databases &amp; Backend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Studio3T</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">C++</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <div class="skill-cat-name">Data Analytics</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">IBM SPSS</span>
+        <span class="skill-tag">Excel (Pivot)</span>
+        <span class="skill-tag">Data Modeling</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="skill-cat-name">IT Support &amp; Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Hardware/SW Troubleshoot</span>
+        <span class="skill-tag">OS Deployment</span>
+        <span class="skill-tag">Windows &amp; Linux</span>
+        <span class="skill-tag">LAN/TCP-IP</span>
+        <span class="skill-tag">Helpdesk</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </div>
+      <div class="skill-cat-name">Dev &amp; Project Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">MS Project</span>
+        <span class="skill-tag">MS Office 365</span>
+        <span class="skill-tag">Teams</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      </div>
+      <div class="skill-cat-name">Creative &amp; Media</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Adobe Premiere Pro</span>
+        <span class="skill-tag">CapCut</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">Scratch</span>
+        <span class="skill-tag">MakeCode</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Gallery Section -->
-      <section id="gallery">
-        <h2>Gallery</h2>
-        <div class="gallery">
-            <img src="Images/emak abah p.jpg" alt="Gallery Image 1">
-            <img src="Images/emak abah.jpg" alt="Gallery Image 2">
-            <img src="Images/family.jpg" alt="Gallery Image 3">
-            <img src="Images/WhatsApp Image 2024-12-03 at 23.27.48_147a3ae2.jpg" alt="Gallery Image 4">
-            <img src="Images/w kimi.jpg" alt="Gallery Image 5">
-            <img src="Images/IMG-20241203-WA0050.jpg" alt="Gallery Image 6">
-            <img src="Images/IMG-20241203-WA0043.jpg" alt="Gallery Image 7">
-            <img src="Images/IMG-20241203-WA0041.jpg" alt="Gallery Image 8">
-            <img src="Images/g7.jpg" alt="Gallery Image 9">
-            <img src="Images/g 1.jpg" alt="Gallery Image 10">
-            <img src="Images/g3.jpg" alt="Gallery Image 11">
-            <img src="Images/g6.jpg" alt="Gallery Image 12">
-            <img src="Images/WhatsApp Image 2024-12-03 at 23.27.47_7ce6a0f3.jpg" alt="Gallery Image 13">
-            <img src="Images/collage.jpg" alt="Gallery Image 14">
-            <img src="Images/g8.jpg" alt="Gallery Image 15">
-        </div>
-    </section>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 // Experience</div>
+  <h2 class="section-title">Work History</h2>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-period">JULY 2024 — SEPTEMBER 2024</div>
+      <div class="exp-role">IT Support &amp; Educator Intern</div>
+      <div class="exp-company">Sekolah Kebangsaan Batu Kikir</div>
+      <ul class="exp-bullets">
+        <li>Diagnosed and resolved hardware/software anomalies for administrative and student desktop workstations, executed routine OS updates, and maintained audio-visual networks with zero daily operational downtime.</li>
+        <li>Spearheaded the end-to-end launch of the school's multimedia broadcast channel (TVPSS SKBK) across social media networks, directing high-engagement video production using Adobe Premiere Pro, CapCut, and Canva.</li>
+        <li>Served as substitute educator for Reka Bentuk Dan Teknologi (RBT), distilling abstract computing, electronics, and design concepts into highly comprehensible learning modules.</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">POST-SPM</div>
+      <div class="exp-role">Canteen Staff</div>
+      <div class="exp-company">SK Batu Kikir</div>
+      <ul class="exp-bullets">
+        <li>Gained hands-on work experience in a service environment, developing responsibility and professionalism before pursuing higher education in IT.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">04 // Projects</div>
+  <h2 class="section-title">Technical Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-name">Misa Cinema</div>
+      <div class="project-course">IMS560 · Advanced Database Management</div>
+      <div class="project-desc">Dynamic web platform for digital movie browsing with custom frontend UIs. Database backend architected from scratch, integrating MongoDB and Studio3T for optimized schema config and low-latency query handling.</div>
+      <div class="project-stack">
+        <span class="stack-pill">MongoDB</span>
+        <span class="stack-pill">Studio3T</span>
+        <span class="stack-pill">HTML/CSS</span>
+        <span class="stack-pill">NoSQL</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-name">Taskline Manager</div>
+      <div class="project-course">IMS566 · Advanced Web Design</div>
+      <div class="project-desc">Secure full-stack task-tracking platform leveraging the CakePHP MVC framework. Clean architecture and reliable web logic ensure a seamless, user-centric project management workflow.</div>
+      <div class="project-stack">
+        <span class="stack-pill">PHP</span>
+        <span class="stack-pill">CakePHP</span>
+        <span class="stack-pill">MVC</span>
+        <span class="stack-pill">MySQL</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-name">Data Analytics Dashboard</div>
+      <div class="project-course">IMS563 / IMC501 · Data &amp; Information</div>
+      <div class="project-desc">Advanced statistical extraction and modelling using IBM SPSS to uncover critical trend patterns. Transformed raw multi-layered datasets into clean interactive visual stories via Tableau dashboards.</div>
+      <div class="project-stack">
+        <span class="stack-pill">Tableau</span>
+        <span class="stack-pill">IBM SPSS</span>
+        <span class="stack-pill">Excel</span>
+        <span class="stack-pill">Data Viz</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-name">Cinema Ticket Logic System</div>
+      <div class="project-course">IMS511 · Problem Solving &amp; Program Design 2</div>
+      <div class="project-desc">Programmed logical algorithms and back-end booking simulations using structured programming to streamline seat reservation workflows and tackle complex design constraints.</div>
+      <div class="project-stack">
+        <span class="stack-pill">Java</span>
+        <span class="stack-pill">Algorithms</span>
+        <span class="stack-pill">Logic Design</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-name">Personal Portfolio Website</div>
+      <div class="project-course">Personal Project</div>
+      <div class="project-desc">Built and launched a fully responsive digital portfolio to showcase technical competencies, academic projects, and multimedia assets. Uses GitHub for version control and source code management.</div>
+      <div class="project-stack">
+        <span class="stack-pill">HTML/CSS</span>
+        <span class="stack-pill">JavaScript</span>
+        <span class="stack-pill">GitHub</span>
+        <span class="stack-pill">Responsive</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">06</div>
+      <div class="project-name">TVPSS SKBK Broadcast Channel</div>
+      <div class="project-course">Internship Project</div>
+      <div class="project-desc">Directed the end-to-end launch of the school's multimedia broadcast channel across mainstream social media platforms. Led high-engagement video production and digital project management.</div>
+      <div class="project-stack">
+        <span class="stack-pill">Premiere Pro</span>
+        <span class="stack-pill">CapCut</span>
+        <span class="stack-pill">Canva</span>
+        <span class="stack-pill">Social Media</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Welcome to My World | All Rights Reserved</p>
-        <button onclick="scrollToTop()">Back to Top</button>
-    </footer>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">05 // Education</div>
+  <h2 class="section-title">Academic Background</h2>
+  <div class="edu-grid">
+    <div class="edu-card current">
+      <div class="edu-period">2025 — PRESENT</div>
+      <div class="edu-degree">Bachelor of Information Science (Honours)<br>Information Systems Management</div>
+      <div class="edu-uni">Universiti Teknologi MARA (UiTM), Puncak Perdana</div>
+      <div class="edu-gpa">GPA 3.34</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">2022 — 2025</div>
+      <div class="edu-degree">Diploma in Information Management</div>
+      <div class="edu-uni">Universiti Teknologi MARA (UiTM), Rembau</div>
+      <div class="edu-gpa">CGPA 3.16</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">Secondary</div>
+      <div class="edu-degree">SMA Haji Muhammad</div>
+      <div class="edu-uni">Religious Secondary School</div>
+      <div style="font-size: 13px; color: var(--text-muted); margin-top: 12px; line-height: 1.6;">Developed discipline, strong ethics, and a foundation of excellent character through religious education.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">Primary</div>
+      <div class="edu-degree">Sekolah Kebangsaan Batu Kikir</div>
+      <div class="edu-uni">Primary School</div>
+      <div style="font-size: 13px; color: var(--text-muted); margin-top: 12px; line-height: 1.6;">Where the journey began — curious, energetic, and eager to learn.</div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-label">06 // Leadership</div>
+  <h2 class="section-title">Involvement &amp; Leadership</h2>
+  <div class="leadership-list">
+    <div class="leadership-item">
+      <div class="leadership-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div class="leadership-role">Event Emcee — Jasmine Esports League</div>
+        <div class="leadership-desc">Served as official Master of Ceremonies, driving live audience engagement, delivering formal opening addresses, and maintaining dynamic flow control for a live-broadcasted production.</div>
+      </div>
+    </div>
+    <div class="leadership-item">
+      <div class="leadership-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div>
+        <div class="leadership-role">Event Logistics — Inkspire Future Program</div>
+        <div class="leadership-desc">Collaborated within an agile academic group to execute event milestones and manage operational deliverables successfully.</div>
+      </div>
+    </div>
+    <div class="leadership-item">
+      <div class="leadership-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div>
+        <div class="leadership-role">Commander Leadership Training — Latihan Bakal Komander</div>
+        <div class="leadership-desc">Completed rigorous, high-intensity leadership development targeting emergency readiness, strategic resource coordination, and team command mechanics.</div>
+      </div>
+    </div>
+    <div class="leadership-item">
+      <div class="leadership-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6.29 6.29l.42-.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
+      </div>
+      <div>
+        <div class="leadership-role">Class Representative — UiTM</div>
+        <div class="leadership-desc">Acted as the primary communication bridge between faculty heads and students to systematically manage academic updates and resolve operational issues.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label">07 // Gallery</div>
+  <h2 class="section-title">Moments</h2>
+  <div class="gallery-grid">
+    <img src="Images/emak abah p.jpg" alt="Family">
+    <img src="Images/emak abah.jpg" alt="Family">
+    <img src="Images/family.jpg" alt="Family">
+    <img src="Images/WhatsApp Image 2024-12-03 at 23.27.48_147a3ae2.jpg" alt="Photo">
+    <img src="Images/w kimi.jpg" alt="With friends">
+    <img src="Images/IMG-20241203-WA0050.jpg" alt="Photo">
+    <img src="Images/IMG-20241203-WA0043.jpg" alt="Photo">
+    <img src="Images/IMG-20241203-WA0041.jpg" alt="Fishing">
+    <img src="Images/g7.jpg" alt="Photo">
+    <img src="Images/g 1.jpg" alt="Photo">
+    <img src="Images/g3.jpg" alt="Photo">
+    <img src="Images/g6.jpg" alt="Photo">
+    <img src="Images/IMG-20241204-WA0008.jpg" alt="University">
+    <img src="Images/uni mak n abah.jpg" alt="University">
+    <img src="Images/collage.jpg" alt="Collage">
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="justify-content: center;">08 // Contact</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <p class="contact-sub">Open to internships, entry-level roles, and freelance work in IT Support, System Analysis, or Full-Stack Development. Let's build something great.</p>
+  <div class="contact-links">
+    <a href="mailto:nrimam04@gmail.com" class="contact-link">
+      <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      nrimam04@gmail.com
+    </a>
+    <a href="tel:+60169611442" class="contact-link">
+      <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6.29 6.29l.42-.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
+      016-9611442
+    </a>
+    <a href="https://www.linkedin.com/in/nrimam/" target="_blank" class="contact-link">
+      <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/nrimm04" target="_blank" class="contact-link">
+      <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.instagram.com/immhq__" target="_blank" class="contact-link">
+      <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      @immhq__
+    </a>
+    <a href="https://www.facebook.com/nurimamulhaq" target="_blank" class="contact-link">
+      <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2024 <span>Nur Imamulhaq</span> · All rights reserved</div>
+  <a href="#hero" class="back-top">↑ BACK TO TOP</a>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.skill-cat, .project-card, .edu-card, .leadership-item, .exp-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id], div[id="hero"]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#f0f0f0' : '';
+    });
+  });
+</script>
 </body>
+</html>
