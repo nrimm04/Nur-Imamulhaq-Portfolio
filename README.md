@@ -1,4 +1,4 @@
-# 🌐 Personal Website - Welcome to My World
+# 🌐 MY PORTFOLIO- Welcome to My World
 
 Welcome to the repository of my personal website! This project is a simple, clean, and responsive digital biodata that showcases my life, education, hobbies, and achievements.
 
