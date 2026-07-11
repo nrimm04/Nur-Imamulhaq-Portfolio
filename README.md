@@ -2,7 +2,7 @@
 
 Welcome to the repository of my personal website! This project is a simple, clean, and responsive digital biodata that showcases my life, education, hobbies, and achievements.
 
-👉 **[Live Demo Here]((https://nrimm04.github.io/MY_PORTFOLIO/))**
+👉 **[Live Demo Here]([https://nrimm04.github.io/MY_PORTFOLIO/])**
 
 ---
 
