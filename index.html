@@ -680,6 +680,119 @@
   }
   .back-top:hover { color: var(--red); }
 
+  /* CERTIFICATES & RESUME */
+  #certificates { border-top: 1px solid var(--border); }
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+  .cert-card {
+    background: var(--bg);
+    padding: 28px;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cert-card:hover { background: var(--bg2); }
+  .cert-icon {
+    width: 36px; height: 36px;
+    background: var(--red-glow);
+    border: 1px solid var(--border-red);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .cert-name {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .cert-issuer {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .cert-date {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+  }
+  .cert-view {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    width: fit-content;
+  }
+  .cert-view:hover { color: var(--red); border-color: var(--border-red); background: var(--red-glow); }
+  .cert-subhead {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cert-subhead::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .resume-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 56px;
+  }
+  .resume-info { display: flex; align-items: center; gap: 16px; }
+  .resume-text-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .resume-text-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+  .proof-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+  .proof-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    max-width: 640px;
+  }
+  .proof-links { display: flex; gap: 16px; flex-wrap: wrap; }
+
   /* GALLERY */
   #gallery { border-top: 1px solid var(--border); }
   .gallery-grid {
@@ -731,6 +844,7 @@
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#certificates">Certificates</a></li>
     <li><a href="#gallery">Gallery</a></li>
   </ul>
   <a href="#contact" class="nav-cta">HIRE ME</a>
@@ -1103,9 +1217,123 @@
   </div>
 </section>
 
+<!-- CERTIFICATES, RESUME & PROOF OF WORK -->
+<section id="certificates">
+  <div class="section-label">07 // Certificates</div>
+  <h2 class="section-title">Certificates, Resume &amp; Proof of Work</h2>
+
+  <div class="cert-subhead">Resume</div>
+  <div class="resume-block">
+    <div class="resume-info">
+      <div class="cert-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <div class="resume-text-name">Nur Imamulhaq Bin Anwarul Haq — Resume</div>
+        <div class="resume-text-sub">Updated PDF · Education, Experience, Projects &amp; Skills</div>
+      </div>
+    </div>
+    <a href="Resume/RESUME_NUR_IMAMULHAQ.pdf" target="_blank" class="btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      View / Download Resume
+    </a>
+  </div>
+
+  <div class="cert-subhead">Certificates</div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <div class="cert-name">Dean's Award — Semester 4</div>
+      <div class="cert-issuer">Universiti Teknologi MARA</div>
+      <div class="cert-date">Session 2025/2026</div>
+      <a href="Certificates/Sijil_Dekan_CDIM262_20254_NUR_IMAMULHAQ_BIN_ANWARUL_HAQ.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <div class="cert-name">Dean's Award — Semester 5</div>
+      <div class="cert-issuer">Universiti Teknologi MARA</div>
+      <div class="cert-date">Diploma in Information Management</div>
+      <a href="Certificates/SIJIL_DEKAN_SEMESTER_5.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">Diploma in Information Management</div>
+      <div class="cert-issuer">Universiti Teknologi MARA</div>
+      <div class="cert-date">8 April 2025</div>
+      <a href="Certificates/certificate.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💻</div>
+      <div class="cert-name">C++ Essentials 1</div>
+      <div class="cert-issuer">Cisco Networking Academy</div>
+      <div class="cert-date">13 June 2026</div>
+      <a href="Certificates/C--_Essentials_1_certificate_2025172817-student-uitm-edu-my_e0b3d550-14dd-4919-8af1-0bf07f8cc393.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⚡</div>
+      <div class="cert-name">Advanced JavaScript</div>
+      <div class="cert-issuer">HRD Corp e-LATiH</div>
+      <div class="cert-date">15 June 2026</div>
+      <a href="Certificates/Advanced_JavaScript.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔒</div>
+      <div class="cert-name">Certified Information Systems Security Professional</div>
+      <div class="cert-issuer">HRD Corp e-LATiH</div>
+      <div class="cert-date">14 June 2026</div>
+      <a href="Certificates/Certified_Information_Systems_Security_Professional.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <div class="cert-name">Navigating Through Microsoft Power BI</div>
+      <div class="cert-issuer">HRD Corp e-LATiH</div>
+      <div class="cert-date">15 June 2026</div>
+      <a href="Certificates/Navigating_through_Microsoft_Power_BI.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📈</div>
+      <div class="cert-name">Powerful Data Analysis &amp; Data Modeling in Excel</div>
+      <div class="cert-issuer">HRD Corp e-LATiH</div>
+      <div class="cert-date">14 June 2026</div>
+      <a href="Certificates/Powerful_data_analysis_and_data_modeling_in_excel.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎤</div>
+      <div class="cert-name">Pengacara Majlis — Jasmine E-Sport League</div>
+      <div class="cert-issuer">UiTM Kolej Jasmine, Puncak Perdana</div>
+      <div class="cert-date">17 May 2026</div>
+      <a href="Certificates/PENGACARA_MAJLIS_2.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎮</div>
+      <div class="cert-name">Champion Student League — UiTMCNS 2024</div>
+      <div class="cert-issuer">UiTM Cawangan Negeri Sembilan</div>
+      <div class="cert-date">2024</div>
+      <a href="Certificates/NUR_IMAMULHAQ_BIN_ANWARUL_HAQ.pdf" target="_blank" class="cert-view">View Certificate ↗</a>
+    </div>
+  </div>
+
+  <div class="cert-subhead">Proof of Work — TVPSS SKBK Broadcast Channel</div>
+  <div class="proof-block">
+    <p class="proof-desc">
+      During my IT Support &amp; Educator internship at Sekolah Kebangsaan Batu Kikir, I created and launched the school's official multimedia broadcast channel, TVPSS SKBK, directing video production and managing its social presence. These are the original accounts I set up as part of that internship.
+    </p>
+    <div class="proof-links">
+      <a href="https://www.tiktok.com/@skbk.studio?is_from_webapp=1&sender_device=pc" target="_blank" class="contact-link">
+        <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        TikTok — @skbk.studio
+      </a>
+      <a href="https://www.youtube.com/@SKBKStudio" target="_blank" class="contact-link">
+        <svg class="contact-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+        YouTube — SKBK Studio
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- GALLERY -->
 <section id="gallery">
-  <div class="section-label">07 // Gallery</div>
+  <div class="section-label">08 // Gallery</div>
   <h2 class="section-title">Moments</h2>
   <div class="gallery-grid">
     <img src="Images/emak abah p.jpg" alt="Family">
@@ -1128,7 +1356,7 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label" style="justify-content: center;">08 // Contact</div>
+  <div class="section-label" style="justify-content: center;">09 // Contact</div>
   <h2 class="section-title">Let's Connect</h2>
   <p class="contact-sub">Open to internships, entry-level roles, and freelance work in IT Support, System Analysis, or Full-Stack Development. Let's build something great.</p>
   <div class="contact-links">
@@ -1176,7 +1404,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.skill-cat, .project-card, .edu-card, .leadership-item, .exp-item').forEach(el => {
+  document.querySelectorAll('.skill-cat, .project-card, .edu-card, .leadership-item, .exp-item, .cert-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
